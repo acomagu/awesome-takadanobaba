@@ -5,47 +5,55 @@ import (
 	"os"
 	"fmt"
 	"text/template"
-	"path/filepath"
 )
 
-// Restaurant describes a restaurant.
-type Restaurant struct {
+// Item describes each places or events.
+type Item struct {
 	Description string
 }
 
-const tmplText = `# Restaurants
-{{range $name, $info := .}}
-# {{$name}}
+type Items map[string]Item
+
+type TmplData struct {
+	Title string
+	Items Items
+}
+
+const tmplText = `# {{.Title}}
+{{range $name, $info := .Items}}
+## {{$name}}
 {{$info.Description}}
 {{end}}
 `
 
 func main() {
-	if len(os.Args) < 2 {
-		fmt.Fprintln(os.Stderr, "fatal: repository base dir is needed as argument")
-		os.Exit(1)
-	}
-	repoPath := os.Args[1]
+	primitives := map[string]toml.Primitive{}
 
-	restaurantsPath := filepath.Join(repoPath, "src/restaurants.toml")
-	res := map[string]Restaurant{}
-	fin, err := os.Open(restaurantsPath)
+	meta, err := toml.DecodeReader(os.Stdin, &primitives)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
 
-	outputPath := filepath.Join(repoPath, "target/restaurants.md")
-	fout, err := os.Create(outputPath)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+	var category string
+	meta.PrimitiveDecode(primitives["category"], &category)
+	delete(primitives, "category")
+
+	items := Items{}
+	for name, prim := range primitives {
+		item := Item{}
+		err = meta.PrimitiveDecode(prim, &item)
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+
+		items[name] = item
 	}
 
-	_, err = toml.DecodeReader(fin, &res)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+	data := TmplData{
+		Title: category,
+		Items: items,
 	}
 
 	tmpl, err := template.New("markdown").Parse(tmplText)
@@ -54,7 +62,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	err = tmpl.Execute(fout, res)
+	err = tmpl.Execute(os.Stdout, data)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
