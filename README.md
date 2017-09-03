@@ -1,0 +1,2 @@
+# awesome-takadanobaba
+Hack Takadanobaba.
