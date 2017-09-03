@@ -1,9 +1,9 @@
 package main
 
 import (
-  "github.com/BurntSushi/toml"
-	"os"
 	"fmt"
+	"github.com/BurntSushi/toml"
+	"os"
 	"text/template"
 )
 
