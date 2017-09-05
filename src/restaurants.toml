@@ -4,3 +4,6 @@ category = "Restaurants"
 description = 'ノマドに良い'
 wifi = true
 outlets = true
+
+["つけ麺屋やすべえ 高田馬場店"]
+description = '普通に美味しい'
