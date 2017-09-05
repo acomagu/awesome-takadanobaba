@@ -7,3 +7,13 @@ outlets = true
 
 ["つけ麺屋やすべえ 高田馬場店"]
 description = '普通に美味しい'
+
+[三歩一]
+description = '柚子胡椒が最高な塩ラーメン'
+wifi = false
+outlets = false
+
+[ひまわり]
+description = '魚介系のつけ麺'
+wifi = false
+outlets = false
