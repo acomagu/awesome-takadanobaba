@@ -5,5 +5,5 @@ all: target/restaurants.md
 genmark:
 	go build ./tools/genmark
 
-target/restaurants.md: genmark
+target/restaurants.md: genmark src/restaurants.toml
 	./genmark < src/restaurants.toml > target/restaurants.md
