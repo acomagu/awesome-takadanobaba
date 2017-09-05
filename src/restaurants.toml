@@ -4,3 +4,13 @@ category = "Restaurants"
 description = 'ノマドに良い'
 wifi = true
 outlets = true
+
+[三歩一]
+description = '柚子胡椒が最高な塩ラーメン'
+wifi = false
+outlets = false
+
+[ひまわり]
+description = '魚介系のつけ麺'
+wifi = false
+outlets = false
