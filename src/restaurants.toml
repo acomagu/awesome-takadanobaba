@@ -5,6 +5,11 @@ description = 'ノマドに良い'
 wifi = true
 outlets = true
 
+["R.O.STAR 高田馬場店"]
+description = '全体的に圧倒的に安くてうまいファストフード店っぽい雰囲気のカフェ'
+wifi = true
+outlets = true
+
 ["つけ麺屋やすべえ 高田馬場店"]
 description = '普通に美味しい'
 
@@ -15,5 +20,15 @@ outlets = false
 
 ["ひまわり"]
 description = '魚介系のつけ麺'
+wifi = false
+outlets = false
+
+["らぁ麺やまぐち"]
+description = 'ミシュラン一つ星を獲得している鶏そばがおいしい店'
+wifi = false
+outlets = false
+
+["bar moon walk 高田馬場"]
+description = 'カクテルの種類が豊富'
 wifi = false
 outlets = false
